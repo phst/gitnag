@@ -4,11 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"sort"
-
-	shellquote "github.com/kballard/go-shellquote"
 )
 
 func run(cfg config) error {
@@ -78,11 +75,4 @@ func (p problems) Less(i, j int) bool {
 
 func (p problems) Swap(i, j int) {
 	p[i], p[j] = p[j], p[i]
-}
-
-func (p problem) notify() error {
-	cmd := exec.Command(
-		"terminal-notifier", "-message", p.String(), "-title", "gitnag",
-		"-execute", shellquote.Join("open", "-b", "com.apple.Terminal", "--", p.dir()))
-	return cmd.Run()
 }
