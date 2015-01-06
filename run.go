@@ -25,7 +25,9 @@ func run(cfg config) error {
 			return nil
 		}
 		if err := r.check(); err != nil {
-			problems = append(problems, problem{*r, err.Error()})
+			p := problem{*r, err.Error()}
+			log.Printf("found problem: %s", p)
+			problems = append(problems, p)
 		}
 		return filepath.SkipDir
 	}
