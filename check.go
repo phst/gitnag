@@ -32,16 +32,16 @@ func (r repo) workTreeClean() error {
 }
 
 func (r repo) pull() error {
-	log.Printf("pulling to %s", r.gitDir)
+	log.Printf("pulling to %s", r.workTree)
 	if _, err := r.call("pull", "--ff-only"); err != nil {
-		return fmt.Errorf("could not pull %s: %v", r.gitDir, err)
+		return fmt.Errorf("could not pull %s: %v", r.workTree, err)
 	}
 	return nil
 
 }
 
 func (r repo) allCommitsPushed() error {
-	log.Printf("comparing commits of %s to upstream", r.gitDir)
+	log.Printf("comparing commits of %s to upstream", r.workTree)
 	out, err := r.call("rev-list", "--count", "@{upstream}..")
 	if err != nil {
 		return err
@@ -51,7 +51,7 @@ func (r repo) allCommitsPushed() error {
 		return fmt.Errorf("could not parse commit count %q: %v", out, err)
 	}
 	if n != 0 {
-		return fmt.Errorf("%d commits unpushed in %s", n, r.gitDir)
+		return fmt.Errorf("%d commits unpushed in %s", n, r.workTree)
 	}
 	return nil
 }

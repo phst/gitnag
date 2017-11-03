@@ -51,15 +51,8 @@ type problem struct {
 	desc string
 }
 
-func (p problem) dir() string {
-	if p.workTree != "" {
-		return p.workTree
-	}
-	return p.gitDir
-}
-
 func (p problem) String() string {
-	return fmt.Sprintf("%s: %s", p.dir(), p.desc)
+	return fmt.Sprintf("%s: %s", p.workTree, p.desc)
 }
 
 type problems []problem
@@ -69,8 +62,8 @@ func (p problems) Len() int {
 }
 
 func (p problems) Less(i, j int) bool {
-	if p[i].gitDir != p[j].gitDir {
-		return p[i].gitDir < p[j].gitDir
+	if p[i].workTree != p[j].workTree {
+		return p[i].workTree < p[j].workTree
 	}
 	return p[i].desc < p[j].desc
 }
