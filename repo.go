@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/golang/glog"
 )
 
 type repo struct {
@@ -66,7 +67,7 @@ func getWorkTree(dir string) (string, error) {
 	if path == "" {
 		return "", fmt.Errorf("%v returned empty output", cmd.Args)
 	}
-	log.Printf("found work tree in %s", path)
+	glog.Infof("found work tree in %s", path)
 	return path, nil
 }
 
