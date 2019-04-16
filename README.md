@@ -6,7 +6,7 @@ are any commits that should be pushed upstream.  It also automatically
 fast-forwards clean repositories from upstream if possible.  It displays issues
 using the default notification method of your graphical environment.
 
-Run the program as follows
+Run the program as follows:
 
 ```shell
 gitnag -config gitnag.json
