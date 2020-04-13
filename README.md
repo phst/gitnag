@@ -25,3 +25,5 @@ gitnag should search as a JSON file of the form
 ```
 
 To be most effective, run gitnag as a cron job or similar.
+
+This is not an officially supported Google product.
