@@ -17,8 +17,7 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-
-	"github.com/golang/glog"
+	"log"
 )
 
 type config struct {
@@ -26,7 +25,7 @@ type config struct {
 }
 
 func loadConfig(file string) (*config, error) {
-	glog.Infof("loading configuration from %v", file)
+	log.Printf("loading configuration from %v", file)
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
@@ -35,6 +34,6 @@ func loadConfig(file string) (*config, error) {
 	if err := json.Unmarshal(b, &r); err != nil {
 		return nil, err
 	}
-	glog.Infof("configuration specifies %d directories", len(r.Directories))
+	log.Printf("configuration specifies %d directories", len(r.Directories))
 	return &r, nil
 }

@@ -16,9 +16,8 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strconv"
-
-	"github.com/golang/glog"
 )
 
 func (r repo) check() error {
@@ -35,7 +34,7 @@ func (r repo) check() error {
 }
 
 func (r repo) workTreeClean() error {
-	glog.Infof("checking whether work tree and index in %s are clean", r.workTree)
+	log.Printf("checking whether work tree and index in %s are clean", r.workTree)
 	out, err := r.call("status", "-z")
 	if err != nil {
 		return err
@@ -47,7 +46,7 @@ func (r repo) workTreeClean() error {
 }
 
 func (r repo) pull() error {
-	glog.Infof("pulling to %s", r.workTree)
+	log.Printf("pulling to %s", r.workTree)
 	if _, err := r.call("pull", "--ff-only"); err != nil {
 		return fmt.Errorf("could not pull %s: %v", r.workTree, err)
 	}
@@ -56,7 +55,7 @@ func (r repo) pull() error {
 }
 
 func (r repo) allCommitsPushed() error {
-	glog.Infof("comparing commits of %s to upstream", r.workTree)
+	log.Printf("comparing commits of %s to upstream", r.workTree)
 	out, err := r.call("rev-list", "--count", "@{upstream}..")
 	if err != nil {
 		return err

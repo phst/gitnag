@@ -16,11 +16,10 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
-
-	"github.com/golang/glog"
 )
 
 func run(cfg config) error {
@@ -41,13 +40,13 @@ func run(cfg config) error {
 		}
 		if err := r.check(); err != nil {
 			p := problem{*r, err.Error()}
-			glog.Errorf("found problem: %s", p)
+			log.Printf("found problem: %s", p)
 			problems = append(problems, p)
 		}
 		return filepath.SkipDir
 	}
 	for dir := range cfg.Directories {
-		glog.Infof("processing directory %s", dir)
+		log.Printf("processing directory %s", dir)
 		if err := filepath.Walk(dir, runDir); err != nil {
 			return fmt.Errorf("could not walk directory %s: %v", dir, err)
 		}
