@@ -31,7 +31,7 @@ func main() {
 	}
 	cfg, err := loadConfig(*configFile)
 	if err != nil {
-		log.Fatal("could not load configuration: %v", err)
+		log.Fatalf("could not load configuration: %v", err)
 	}
 	if err := run(*cfg); err != nil {
 		log.Fatal(err)
