@@ -51,12 +51,14 @@ func run(cfg config) error {
 			return fmt.Errorf("could not walk directory %s: %v", dir, err)
 		}
 	}
+	log.Printf("found %d problems", len(problems))
 	sort.Sort(problems)
 	for _, p := range problems {
 		if err := p.notify(); err != nil {
 			return err
 		}
 	}
+	log.Print("completed successfully")
 	return nil
 }
 
