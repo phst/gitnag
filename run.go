@@ -1,4 +1,4 @@
-// Copyright 2015 Google LLC
+// Copyright 2015, 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,8 +18,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/user"
 	"path/filepath"
 	"sort"
+	"strings"
 )
 
 func run(cfg config) error {
@@ -68,7 +70,7 @@ type problem struct {
 }
 
 func (p problem) String() string {
-	return fmt.Sprintf("%s: %s", p.workTree, p.desc)
+	return fmt.Sprintf("%s: %s", shortenFilename(p.workTree), p.desc)
 }
 
 type problems []problem
@@ -86,4 +88,18 @@ func (p problems) Less(i, j int) bool {
 
 func (p problems) Swap(i, j int) {
 	p[i], p[j] = p[j], p[i]
+}
+
+func shortenFilename(s string) string {
+	s = filepath.Clean(s)
+	u, err := user.Current()
+	if err != nil || u.HomeDir == "" {
+		return s
+	}
+	h := filepath.Clean(u.HomeDir)
+	p := h + string(filepath.Separator)
+	if strings.HasPrefix(s, p) {
+		return filepath.Join("~", s[len(p):])
+	}
+	return s
 }
