@@ -1,4 +1,4 @@
-// Copyright 2015 Google LLC
+// Copyright 2015, 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 type config struct {
@@ -26,7 +26,7 @@ type config struct {
 
 func loadConfig(file string) (*config, error) {
 	log.Printf("loading configuration from %v", file)
-	b, err := ioutil.ReadFile(file)
+	b, err := os.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
