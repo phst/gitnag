@@ -22,7 +22,7 @@ GO = go
 all: gitnag
 	$(GO) build ./...
 
-gitnag:
+gitnag: always
 	$(GO) build
 
 check: all
@@ -35,3 +35,5 @@ clean:
 
 install: all
 	$(GO) install
+
+always:
