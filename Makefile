@@ -19,8 +19,11 @@ SHELL = /bin/sh
 
 GO = go
 
-all:
+all: gitnag
 	$(GO) build ./...
+
+gitnag:
+	$(GO) build
 
 check: all
 	$(GO) test ./...
