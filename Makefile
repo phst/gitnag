@@ -1,4 +1,4 @@
-# Copyright 2025 Philipp Stephani
+# Copyright 2025, 2026 Philipp Stephani
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # limitations under the License.
 
 .POSIX:
+.PHONY: all gitnag check clean install
 .SUFFIXES:
 
 SHELL = /bin/sh
@@ -23,7 +24,7 @@ STATICCHECK = $(GO) tool staticcheck
 all: gitnag
 	$(GO) build ./...
 
-gitnag: always
+gitnag:
 	$(GO) build
 
 check: all
@@ -36,5 +37,3 @@ clean:
 
 install: all
 	$(GO) install
-
-always:
