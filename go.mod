@@ -1,4 +1,4 @@
-// Copyright 2025 Philipp Stephani
+// Copyright 2025, 2026 Philipp Stephani
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 module github.com/phst/gitnag
 
-go 1.26.0
+go 1.27.0
 
 require github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51
 
